@@ -1,6 +1,6 @@
 import { redirect, fail } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
-import { ADMIN_USERNAME } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 import { createAdminJWT, verifyPassword } from '$lib/server/auth';
 import { z } from 'zod';
 import { zod } from 'sveltekit-superforms/adapters';
@@ -27,19 +27,26 @@ export const actions = {
 	default: async ({ request, cookies }) => {
 		const form = await superValidate(request, zod(loginSchema));
 
+		console.debug('============= Recieved Login Request =============');
 		if (!form.valid) {
+			console.error('Invalid FORM!');
 			return fail(400, { form });
 		}
+		console.debug('FORM OK!');
 
 		await new Promise((resolve) => setTimeout(resolve, 300));
 
-		if (form.data.username !== ADMIN_USERNAME) {
+		if (form.data.username !== env.ADMIN_USERNAME) {
+			console.error('Invalid Username!');
 			return message(form, { status: 401, text: 'Invalid username or password' });
 		}
+		console.debug('Username OK!');
 
 		if (!(await verifyPassword(form.data.password))) {
+			console.error('Invalid Password!');
 			return message(form, { status: 401, text: 'Invalid username or password' });
 		}
+		console.debug('Password OK!');
 
 		const token = createAdminJWT();
 
