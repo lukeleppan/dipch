@@ -1,0 +1,59 @@
+# Dependency directories
+node_modules/
+.pnpm-store/
+
+# Build outputs
+build/
+dist/
+
+# Environment files
+.env
+.env.*
+!.env.example
+!.env.build
+
+# Editor directories and files
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+
+# Version control
+.git/
+.gitignore
+.gitattributes
+
+# Logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Test coverage
+coverage/
+.nyc_output
+
+# Misc
+README.md
+LICENSE
+.github/
+docs/
+tests/
+test/
+__tests__/
+*.md
+.prettierrc
+.eslintrc.js
+.eslintignore
+.editorconfig
+
+# Docker
+Dockerfile
+.dockerignore
+docker-compose.yml
